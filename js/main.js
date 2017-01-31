@@ -48,8 +48,8 @@ createButton();
 					left: tds[i].offsetLeft,
 				},
 				vector: {
-					x: getRandomNegativeInteger(-10,10),
-					y: getRandomNegativeInteger(-10,10),
+					x: getRandomInteger(0.2,10) * (Math.round(Math.random()) ? 1 : -1),
+					y: getRandomInteger(0.2,10) * (Math.round(Math.random()) ? 1 : -1),
 				}
 			});
 		}
@@ -79,9 +79,6 @@ createButton();
 	function getRandomInteger(min, max) {
     	return Math.abs(Math.round(min - 0.5 + Math.random() * (max - min + 1)));
 	}
-	function getRandomNegativeInteger(min, max) {
-    	return Math.round(min - 0.5 + Math.random() * (max - min + 1));
-	}
 function runAnimation(config) {
 	intervalId = setInterval(animate, DELAY);
 }
@@ -97,15 +94,15 @@ function animate() {
 }
 
 function move(cell) {
-	var top = parseInt(cell.vector.y + parseInt(cell.td.style.top)  + PX) + parseInt(table.style.top) ;
-	var left = parseInt(cell.vector.x + parseInt(cell.td.style.left) + PX) + parseInt(table.style.left) ;
+	var top = parseInt(cell.vector.y + parseInt(cell.td.style.top)) + parseInt(table.style.top) ;
+	var left = parseInt(cell.vector.x + parseInt(cell.td.style.left)) + parseInt(table.style.left) ;
 	var w = window.innerWidth;
 	var h = window.innerHeight;
 	if(top+33 >= h || top <=0) {
-		cell.vector.y *=(-1);
+		cell.vector.y *=-1;
 	}
 	if( left+33 >= w || left <=0 ) {
-		cell.vector.x *=(-1);
+		cell.vector.x *=-1;
 	}
 	cell.td.style.top = cell.vector.y+parseInt(cell.td.style.top) + PX;
 	cell.td.style.left = cell.vector.x+parseInt(cell.td.style.left) + PX;
